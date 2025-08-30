@@ -26,7 +26,11 @@ export const generateReceipt = (orderData) => {
     doc.setLineWidth(1);
     doc.line(30, 55, 180, 55);
     
-    // Order Header
+   
+    
+    if (pageNumber === 1) {
+
+       // Order Header
     doc.setFontSize(16);
     doc.setTextColor(80, 80, 80);
     doc.text('ORDER RECEIPT', 105, 65, null, null, 'center');
@@ -36,8 +40,6 @@ export const generateReceipt = (orderData) => {
     doc.setTextColor(16, 185, 129);
     doc.text(`Order Date: ${new Date().toLocaleDateString()}`, 180, 75, null, null, 'right');
     doc.text(`Order ID: ${orderData._id}`, 180, 81, null, null, 'right');
-    
-    if (pageNumber === 1) {
       doc.setFontSize(12);
       doc.setTextColor(6, 182, 212);
       doc.text('Customer Information:', 20, 85);
