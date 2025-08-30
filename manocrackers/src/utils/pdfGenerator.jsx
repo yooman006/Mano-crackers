@@ -60,14 +60,16 @@ export const generateReceipt = (orderData) => {
     doc.setTextColor(6, 182, 212);
     doc.text('Order Items:', 20, startY);
 
+    // Updated header background to accommodate new column
     doc.setFillColor(16, 185, 129);
     doc.rect(20, startY + 5, 170, 8, 'F');
 
     doc.setTextColor(255, 255, 255);
-    doc.setFontSize(10);
+    doc.setFontSize(9); // Slightly smaller font for headers to fit all columns
     doc.text('S.No', 25, startY + 10);
     doc.text('Item', 40, startY + 10);
-    doc.text('Price', 140, startY + 10);
+    doc.text('Orig. Price', 110, startY + 10);
+    doc.text('Disc. Price', 135, startY + 10);
     doc.text('Qty', 160, startY + 10);
     doc.text('Total', 180, startY + 10);
 
@@ -75,19 +77,37 @@ export const generateReceipt = (orderData) => {
     items.forEach((item, index) => {
       const rowColor = index % 2 === 0 ? [240, 253, 250] : [220, 252, 231];
       doc.setFillColor(...rowColor);
-      doc.rect(20, yPos - 3, 180, 6, 'F');
+      doc.rect(20, yPos - 3, 170, 6, 'F');
 
       doc.setTextColor(0, 0, 0);
+      doc.setFontSize(9); // Smaller font for content to fit all columns
       const serialNumber = (pageNumber - 1) * itemsPerPage + index + 1;
 
-      doc.text(serialNumber.toString(), 25, yPos);
-      const itemNameLines = doc.splitTextToSize(item.name, 70);
-      const linesNeeded = itemNameLines.length;
+      // Calculate discounted price (assuming discount percentage is available in orderData)
+      const discountPercentage = orderData.totals.discountPercentage || 0;
+      const originalPrice = item.originalPrice || item.price / (1 - discountPercentage / 100);
+      const discountedPrice = item.price;
 
+      doc.text(serialNumber.toString(), 25, yPos);
+      
+      // Item name with adjusted width for new columns
+      const itemNameLines = doc.splitTextToSize(item.name, 60);
+      const linesNeeded = itemNameLines.length;
       doc.text(itemNameLines, 40, yPos);
-      doc.text(`${Math.round(item.price.toFixed(2))}`, 140, yPos);
+      
+      // Original price (with strikethrough effect)
+      doc.setTextColor(128, 128, 128); // Gray color for original price
+      doc.text(`${Math.round(originalPrice)}`, 110, yPos);
+     
+      
+      // Discounted price (green color)
+      doc.setTextColor(16, 185, 129);
+      doc.text(`${Math.round(discountedPrice)}`, 135, yPos);
+      
+      // Quantity and total (black color)
+      doc.setTextColor(0, 0, 0);
       doc.text(item.quantity.toString(), 160, yPos);
-      doc.text(`${Math.round(item.price * item.quantity).toFixed(2)}`, 180, yPos);
+      doc.text(`${Math.round(discountedPrice * item.quantity)}`, 180, yPos);
 
       yPos += 6 * linesNeeded;
     });
@@ -102,31 +122,39 @@ export const generateReceipt = (orderData) => {
 
     doc.setFontSize(10);
     doc.setTextColor(0, 0, 0);
-    doc.text('Subtotal', 140, yPos + 18);
-    doc.text(`: ${Math.round(orderData.totals.subtotal.toFixed(2))}`, 180, yPos + 18);
+    
+    // Original Subtotal (with strikethrough)
+    doc.setTextColor(128, 128, 128);
+    doc.text('Original Subtotal', 140, yPos + 18);
+    const originalSubtotalText = `:${Math.round(orderData.totals.originalSubtotal || orderData.totals.subtotal)}`;
+    doc.text(originalSubtotalText, 180, yPos + 18);
+   
 
     if (orderData.totals.discountAmount > 0) {
-      doc.text(`Discount `, 140, yPos + 24);
-      doc.text(`: -${orderData.totals.discountPercentage}%`, 180, yPos + 24);
+      doc.setTextColor(16, 185, 129);
+      doc.text(`Discount (${orderData.totals.discountPercentage}%):`, 140, yPos + 24);
+      doc.text(`:${Math.round(orderData.totals.discountAmount)}`, 180, yPos + 24);
       yPos += 6;
     }
 
+    
+
     doc.setFont(undefined, 'bold');
-    doc.text('Total Amount', 140, yPos + 28);
-    doc.text(`: ${Math.round(orderData.totals.total.toFixed(2))}`, 180, yPos + 28);
+    doc.setTextColor(16, 185, 129);
+    doc.text('Final Total:', 140, yPos + 34);
+    doc.text(`:${Math.round(orderData.totals.total)}`, 180, yPos + 34);
+
+  
 
     // Footer
     doc.setFontSize(12);
     doc.setTextColor(16, 185, 129);
-    doc.text(' Thank you for your purchase!', 105, yPos + 50, null, null, 'center');
+    doc.text(' Thank you for your purchase!', 105, yPos + 54, null, null, 'center');
     doc.setTextColor(0, 0, 0);
-    doc.text('For any queries, contact us at mks_prithi@yahoo.co.in', 105, yPos + 56, null, null, 'center');
+    doc.text('For any queries, contact us at mks_prithi@yahoo.co.in', 105, yPos + 60, null, null, 'center');
 
     // Decorative circles
-    doc.setFillColor(16, 185, 129);
-    for (let i = 1; i <= 4; i++) {
-      doc.circle(30 + (i * 30), yPos + 65, 3, 'F');
-    }
+   
   };
 
   // Generate all pages

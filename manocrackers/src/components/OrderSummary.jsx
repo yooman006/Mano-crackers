@@ -4,6 +4,11 @@ import { ShoppingCart, CheckCircle } from 'lucide-react';
 export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
   const [showAllItems, setShowAllItems] = useState(false);
   
+  // Calculate discounted price for individual items
+  const getDiscountedPrice = (originalPrice) => {
+    return originalPrice - (originalPrice * (discountPercentage / 100));
+  };
+  
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 h-fit">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-2">
@@ -14,7 +19,7 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
       <div className="mb-6 p-4 bg-emerald-50 rounded-lg border border-emerald-100">
         <p className="text-emerald-700 font-medium flex items-center gap-2">
           <CheckCircle className="w-4 h-4" />
-          Special Offer: {discountPercentage}% discount applied to all orders!
+          Special Offer: {Math.round(discountPercentage * 100)}% discount applied to all orders!
         </p>
       </div>
 
@@ -29,18 +34,26 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {cartItems.slice(0, showAllItems ? cartItems.length : 3).map((item) => (
-              <tr key={`item-${item.id}`} className="hover:bg-gray-50">
-                <td className="py-3">
-                  <div className="font-medium text-gray-800">{item.name}</div>
-                </td>
-                <td className="text-right text-sm text-gray-600">₹{Math.round(item.price)}</td>
-                <td className="text-right text-sm text-gray-600">{item.quantity}</td>
-                <td className="text-right font-medium text-gray-800">
-                  ₹{Math.round(item.price * item.quantity)}
-                </td>
-              </tr>
-            ))}
+            {cartItems.slice(0, showAllItems ? cartItems.length : 3).map((item) => {
+              const discountedPrice = getDiscountedPrice(item.price);
+              
+              return (
+                <tr key={`item-${item.id}`} className="hover:bg-gray-50">
+                  <td className="py-3">
+                    <div className="font-medium text-gray-800">{item.name}</div>
+                    <div className="text-xs text-gray-500">
+                      <span className="line-through">₹{Math.round(item.price)}</span>
+                      <span className="ml-2 text-emerald-600 font-medium">₹{Math.round(discountedPrice)}</span>
+                    </div>
+                  </td>
+                  <td className="text-right text-sm text-emerald-600 font-semibold">₹{Math.round(discountedPrice)}</td>
+                  <td className="text-right text-sm text-gray-600">{item.quantity}</td>
+                  <td className="text-right font-medium text-gray-800">
+                    ₹{Math.round(discountedPrice * item.quantity)}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
 
@@ -56,24 +69,40 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
         )}
       </div>
 
+    
+
       {/* Totals section */}
       <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
         <div className="space-y-3">
           <div className="flex justify-between items-center">
-            <span className="text-gray-600">Subtotal</span>
-            <span className="text-gray-800">₹{Math.round(totals.subtotal)}</span>
+            <span className="text-gray-600">Original Subtotal</span>
+            <span className="text-gray-500 line-through">₹{Math.round(totals.subtotal)}</span>
           </div>
           <div className="flex justify-between items-center text-emerald-600">
-            <span>Discount ({discountPercentage}%)</span>
+            <span>Discount ({Math.round(discountPercentage)}%)</span>
             <span>-₹{Math.round(totals.discountAmount)}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-600">Discounted Subtotal</span>
+            <span className="text-gray-800 font-medium">₹{Math.round(totals.total)}</span>
           </div>
           <div className="border-t border-gray-200 pt-3">
             <div className="flex justify-between items-center">
-              <span className="text-lg font-bold text-gray-800">Total</span>
+              <span className="text-lg font-bold text-gray-800">Final Total</span>
               <span className="text-xl font-bold text-emerald-600">₹{Math.round(totals.total)}</span>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Total Savings Highlight */}
+      <div className="mt-4 p-3 bg-gradient-to-r from-emerald-500 to-green-500 rounded-lg text-white text-center">
+        <p className="text-sm font-medium">
+          🎉 Total Savings: ₹{Math.round(totals.discountAmount)}
+        </p>
+        <p className="text-xs opacity-90 mt-1">
+          You saved {Math.round(discountPercentage)}% on your entire order!
+        </p>
       </div>
 
       {/* Important notes */}
@@ -96,6 +125,10 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
           <li className="flex items-start">
             <span className="mr-2">•</span>
             <span>24/7 customer support available</span>
+          </li>
+          <li className="flex items-start">
+            <span className="mr-2">•</span>
+            <span>Discount prices are already applied</span>
           </li>
         </ul>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import ProductCard from './ProductCard';
 import { useCart } from '../context/CartContext';
 
-const ProductsGrid = ({ filteredProducts, setActiveCategory }) => {
+const ProductsGrid = ({ filteredProducts, setActiveCategory, discountPercentage = 0.75 }) => {
   // Get cart functionality from CartContext
   const { cart, addToCart, removeFromCart } = useCart();
 
@@ -18,6 +18,7 @@ const ProductsGrid = ({ filteredProducts, setActiveCategory }) => {
                 cart={cart}
                 addToCart={addToCart}
                 removeFromCart={removeFromCart}
+                discountPercentage={discountPercentage}
               />
             ))
           ) : (

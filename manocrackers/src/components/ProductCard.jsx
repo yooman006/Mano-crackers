@@ -1,8 +1,12 @@
 import React from 'react';
 import { Star, Plus, Minus } from 'lucide-react';
 
-const ProductCard = ({ product, cart, addToCart, removeFromCart }) => {
+const ProductCard = ({ product, cart, addToCart, removeFromCart, discountPercentage = 0.75 }) => {
   const cartItem = cart.find(item => item.id === product.id);
+  
+  // Calculate discounted price
+  const originalPrice = product.price;
+  const discountedPrice = originalPrice - (originalPrice * discountPercentage);
 
   return (
     <div className="bg-purple-900/20 backdrop-blur-lg rounded-lg overflow-hidden shadow-sm border border-purple-400/20 transition-all duration-200 group hover:border-yellow-400/40">
@@ -16,13 +20,24 @@ const ProductCard = ({ product, cart, addToCart, removeFromCart }) => {
           <Star className="h-2 w-2 text-yellow-400 fill-current" />
           <span className="text-white text-[8px] ml-0.5">{product.rating}</span>
         </div>
+        {/* Discount Badge */}
+        <div className="absolute top-1 left-1 bg-red-500 text-white text-[8px] px-1 py-0.5 rounded">
+          {Math.round(discountPercentage * 100)}% OFF
+        </div>
       </div>
       <div className="p-2 xs:p-3">
         <h3 className="text-[10px] xs:text-xs font-bold text-white mb-1 line-clamp-2 leading-tight min-h-[2.5rem]">{product.name}</h3>
         <div className="flex items-center justify-between mt-1">
-          <span className="text-[20px] xs:text-xs font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-            ₹{Math.round(product.price)}
-          </span>
+          <div className="flex flex-col">
+            {/* Discounted Price */}
+            <span className="text-[20px] xs:text-xs font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+              ₹{Math.round(discountedPrice)}
+            </span>
+            {/* Original Price with strikethrough */}
+            <span className="text-[10px] xs:text-[10px] text-gray-400 line-through">
+              ₹{Math.round(originalPrice)}
+            </span>
+          </div>
 
           {cartItem ? (
             <div className="flex items-center bg-purple-500/20 backdrop-blur-sm rounded-full border border-purple-400/30 overflow-hidden">
