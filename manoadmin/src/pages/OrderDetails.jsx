@@ -1,33 +1,103 @@
-// components/OrderDetails.jsx
+// pages/OrderDetails.jsx
 import { User, MapPin, ArrowLeft, CheckCircle, Truck, Calendar, Download, Phone, Mail } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { pdfService } from '../services/pdfService';
+import { orderService } from '../services/orderService';
 import { formatDate } from '../utils/dateUtils';
+import LoadingSpinner from '../components/LoadingSpinner';
+import ErrorDisplay from '../components/ErrorDisplay';
 
-export default function OrderDetails({ order, onBackToList, onDeliveryStatusChange }) {
+export default function OrderDetails() {
+  const { orderId } = useParams();
+  const navigate = useNavigate();
+  const [order, setOrder] = useState(null);
   const [isUpdatingDelivery, setIsUpdatingDelivery] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const handleDownloadReceipt = () => {
-    pdfService.generateReceipt(order);
+    if (order) {
+      pdfService.generateReceipt(order);
+    }
   };
 
-  const handleDeliveryToggle = async () => {
+  useEffect(() => {
+    const fetchOrderDetails = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const orderDetails = await orderService.fetchOrderById(orderId);
+        setOrder(orderDetails);
+      } catch (error) {
+        console.error('Error fetching order:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrderDetails();
+  }, [orderId]);
+
+  const handleBackToList = () => {
+    navigate('/');
+  };
+
+  const handleDeliveryStatusChange = async (orderId, isDelivered) => {
     setIsUpdatingDelivery(true);
     try {
-      await onDeliveryStatusChange(order._id, !order.isDelivered);
+      const updatedOrder = await orderService.updateDeliveryStatus(orderId, isDelivered);
+      setOrder(updatedOrder);
+      return updatedOrder;
     } catch (error) {
       console.error('Failed to update delivery status:', error);
+      throw error;
     } finally {
       setIsUpdatingDelivery(false);
     }
   };
+
+  const handleDeliveryToggle = async () => {
+    if (!order) return;
+    
+    try {
+      await handleDeliveryStatusChange(order._id, !order.isDelivered);
+    } catch (error) {
+      console.error('Failed to update delivery status:', error);
+    }
+  };
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <ErrorDisplay error={error} onRetry={() => window.location.reload()} />;
+  }
+
+  if (!order) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Order Not Found</h2>
+          <button
+            onClick={handleBackToList}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          >
+            Back to Orders
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Enhanced Back Button */}
         <button
-          onClick={onBackToList}
+          onClick={handleBackToList}
           className="group flex items-center text-blue-700 hover:text-blue-900 mb-8 transition-all duration-300 text-base font-semibold bg-white/80 backdrop-blur-sm px-4 py-2 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />

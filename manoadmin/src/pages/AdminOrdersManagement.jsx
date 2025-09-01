@@ -1,16 +1,16 @@
 // pages/AdminOrdersManagement.jsx
 import { useState, useEffect, useCallback } from 'react';
-import { Package, TrendingUp, Users, Clock, CheckCircle2, BarChart3 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Package, TrendingUp, Clock, CheckCircle2 } from 'lucide-react';
 import { orderService } from '../services/orderService';
 import OrdersList from '../components/OrdersList';
 import SearchAndFilters from '../components/SearchAndFilters';
-import OrderDetails from '../components/OrderDetails';
 import ErrorDisplay from '../components/ErrorDisplay';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function AdminOrdersManagement() {
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -70,24 +70,9 @@ export default function AdminOrdersManagement() {
     fetchOrders();
   };
 
-  const handleOrderClick = async (order) => {
-    try {
-      setLoading(true);
-      setError(null);
-      const orderDetails = await orderService.fetchOrderById(order._id);
-      setSelectedOrder(orderDetails);
-    } catch (error) {
-      console.error('Error fetching order:', error);
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleBackToList = () => {
-    setSelectedOrder(null);
-    // Refresh orders when returning to list
-    fetchOrders();
+  const handleOrderClick = (order) => {
+    // Navigate directly to order details page
+    navigate(`/order/${order._id}`);
   };
 
   const handleDeliveryStatusChange = async (orderId, isDelivered) => {
@@ -102,15 +87,6 @@ export default function AdminOrdersManagement() {
             : order
         )
       );
-
-      // Update selected order if it's the same one
-      if (selectedOrder && selectedOrder._id === orderId) {
-        setSelectedOrder(prev => ({
-          ...prev,
-          isDelivered,
-          deliveredAt: isDelivered ? new Date() : null
-        }));
-      }
 
       return updatedOrder;
     } catch (error) {
@@ -150,22 +126,12 @@ export default function AdminOrdersManagement() {
   const avgOrderValue = orders.length > 0 ? totalRevenue / orders.length : 0;
   const deliveryRate = orders.length > 0 ? Math.round((deliveredCount / orders.length) * 100) : 0;
 
-  if (loading && !selectedOrder) {
+  if (loading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
     return <ErrorDisplay error={error} onRetry={handleManualRefresh} />;
-  }
-
-  if (selectedOrder) {
-    return (
-      <OrderDetails
-        order={selectedOrder}
-        onBackToList={handleBackToList}
-        onDeliveryStatusChange={handleDeliveryStatusChange}
-      />
-    );
   }
 
   return (

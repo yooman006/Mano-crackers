@@ -1,9 +1,16 @@
 // components/OrdersList.jsx
 import { User, Eye, CheckCircle, Circle } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function OrdersList({ orders, onOrderClick, loading, onDeliveryStatusChange }) {
+export default function OrdersList({ orders, onDeliveryStatusChange, loading }) {
   const [updatingOrders, setUpdatingOrders] = useState(new Set());
+  const navigate = useNavigate();
+
+  const handleOrderClick = (order) => {
+    // Navigate to order details page
+    navigate(`/order/${order._id}`);
+  };
 
   const handleDeliveryToggle = async (e, orderId, currentStatus) => {
     e.stopPropagation(); // Prevent triggering the row click
@@ -67,14 +74,19 @@ export default function OrdersList({ orders, onOrderClick, loading, onDeliverySt
             </thead>
             <tbody className="divide-y divide-gray-100">
               {orders.map((order, index) => (
-                <tr key={order._id} className={`transition-all duration-150 hover:bg-blue-50/50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}`}>
+                <tr 
+                  key={order._id} 
+                  className={`transition-all duration-150 hover:bg-blue-50/50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}`}
+                  onClick={() => handleOrderClick(order)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <td className="px-6 py-4">
                     <div className="flex items-center">
                       <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-3">
                         <User className="w-4 h-4 text-white" />
                       </div>
                       <div className="text-sm font-medium text-gray-900">
-                        {order.customer.firstName} {order.customer.lastName}
+                        {order.customer.firstName}
                       </div>
                     </div>
                   </td>
@@ -115,7 +127,10 @@ export default function OrdersList({ orders, onOrderClick, loading, onDeliverySt
                   </td>
                   <td className="px-6 py-4">
                     <button
-                      onClick={() => onOrderClick(order)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOrderClick(order);
+                      }}
                       className="inline-flex items-center px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 hover:text-blue-700 transition-all duration-200 border border-blue-200 hover:shadow-sm"
                     >
                       <Eye className="w-4 h-4 mr-1" />
@@ -132,7 +147,12 @@ export default function OrdersList({ orders, onOrderClick, loading, onDeliverySt
       {/* Mobile View */}
       <div className="md:hidden space-y-4">
         {orders.map((order) => (
-          <div key={order._id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 hover:shadow-md transition-all duration-200">
+          <div 
+            key={order._id} 
+            className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 hover:shadow-md transition-all duration-200"
+            onClick={() => handleOrderClick(order)}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="flex justify-between items-start mb-3">
               <div className="flex items-center min-w-0">
                 <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mr-3 flex-shrink-0">
@@ -145,7 +165,10 @@ export default function OrdersList({ orders, onOrderClick, loading, onDeliverySt
                 </div>
               </div>
               <button
-                onClick={() => onOrderClick(order)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleOrderClick(order);
+                }}
                 className="ml-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 flex items-center transition-colors duration-150 text-sm flex-shrink-0 border border-blue-200"
               >
                 <Eye className="w-3 h-3 mr-1" />
