@@ -9,61 +9,63 @@ const ProductCard = ({ product, cart, addToCart, removeFromCart, discountPercent
   const discountedPrice = originalPrice - (originalPrice * discountPercentage);
 
   return (
-    <div className="bg-purple-900/20 backdrop-blur-lg rounded-lg overflow-hidden shadow-sm border border-purple-400/20 transition-all duration-200 group hover:border-yellow-400/40">
+    <div className="bg-white/10 backdrop-blur-lg rounded-lg sm:rounded-xl overflow-hidden shadow-md sm:shadow-lg md:shadow-xl border border-white/20 hover:border-yellow-400/50 transition-all duration-300 transform hover:scale-102 group">
       <div className="relative overflow-hidden">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-32 xs:h-36 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-200"
+          className="w-full h-24 sm:h-32 md:h-40 lg:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute top-1 right-1 bg-purple-900/70 backdrop-blur-sm rounded-full p-1 flex items-center border border-purple-400/30">
-          <Star className="h-2 w-2 text-yellow-400 fill-current" />
-          <span className="text-white text-[8px] ml-0.5">{product.rating}</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-black/70 backdrop-blur-sm rounded-full px-1.5 sm:px-2 py-0.5 flex items-center space-x-1">
+          <Star className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-yellow-400 fill-current" />
+          <span className="text-white text-xs">{product.rating}</span>
         </div>
         {/* Discount Badge */}
-        <div className="absolute top-1 left-1 bg-red-500 text-white text-[8px] px-1 py-0.5 rounded">
+        <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-red-500 text-white text-xs px-1.5 sm:px-2 py-0.5 rounded">
           {Math.round(discountPercentage * 100)}% OFF
         </div>
+        <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 h-1 sm:h-1.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
-      <div className="p-2 xs:p-3">
-        <h3 className="text-[10px] xs:text-xs font-bold text-white mb-1 line-clamp-2 leading-tight min-h-[2.5rem]">{product.name}</h3>
+      <div className="p-2 sm:p-3 md:p-4">
+        <h3 className="text-xs sm:text-sm md:text-base font-bold text-white mb-1 line-clamp-1">{product.name}</h3>
         <div className="flex items-center justify-between mt-1">
           <div className="flex flex-col">
             {/* Discounted Price */}
-            <span className="text-[20px] xs:text-xs font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+            <span className="text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
               ₹{Math.round(discountedPrice)}
             </span>
             {/* Original Price with strikethrough */}
-            <span className="text-[10px] xs:text-[10px] text-gray-400 line-through">
+            <span className="text-xs text-gray-300 line-through">
               ₹{Math.round(originalPrice)}
             </span>
           </div>
 
           {cartItem ? (
-            <div className="flex items-center bg-purple-500/20 backdrop-blur-sm rounded-full border border-purple-400/30 overflow-hidden">
+            <div className="flex items-center bg-white/20 backdrop-blur-sm rounded-full border border-white/30 overflow-hidden">
               <button
                 onClick={() => removeFromCart(product.id)}
-                className="w-5 h-5 bg-red-500 hover:bg-red-600 text-white flex items-center justify-center transition-colors"
+                className="w-6 h-6 sm:w-7 sm:h-7 bg-red-500 hover:bg-red-600 text-white font-bold flex items-center justify-center transition-all duration-200"
               >
-                <Minus className="w-2 h-2 stroke-2" />
+                <Minus className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-2" />
               </button>
-              <span className="px-1 text-white font-semibold text-[10px] min-w-[1rem] text-center">
+              <span className="px-1.5 sm:px-2 py-1 text-white font-semibold text-xs sm:text-sm min-w-[1.5rem] text-center">
                 {cartItem.quantity}
               </span>
               <button
                 onClick={() => addToCart(product)}
-                className="w-5 h-5 bg-orange-500 hover:bg-orange-600 text-white flex items-center justify-center transition-colors"
+                className="w-6 h-6 sm:w-7 sm:h-7 bg-green-500 hover:bg-green-600 text-white font-bold flex items-center justify-center transition-all duration-200"
               >
-                <Plus className="w-2 h-2 stroke-2" />
+                <Plus className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-2" />
               </button>
             </div>
           ) : (
             <button
               onClick={() => addToCart(product)}
-              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-1.5 py-0.5 rounded-full text-[18px] xs:text-xs flex items-center transition-all"
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full hover:shadow transition-all duration-200 flex items-center space-x-1 text-xs sm:text-sm"
             >
-              <Plus className="h-2 w-2 mr-0.5" />
-              <span>Add</span>
+              <Plus className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+              <span className="hidden sm:inline">Add</span>
             </button>
           )}
         </div>
