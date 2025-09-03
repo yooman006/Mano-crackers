@@ -1,11 +1,11 @@
-import chakarbig from './racingwheel.jpg'
-import kuruvi from './bird-crackers.png'
-import lakshmi from './laxmi.png'
-import goldlakshmi from './goldlakshmi.png'
+import kuruvi from './bird-crackers.png';
+import lakshmi from './Laxmi.png';
+import goldlakshmi from './goldlakshmi'
+import chakarbig from './chakarbig'
+
+
+
 
 export const assets = {
-    chakarbig,
-    kuruvi,
-    lakshmi,
-    goldlakshmi
-}
+  kuruvi,lakshmi,goldlakshmi,chakarbig
+ };
