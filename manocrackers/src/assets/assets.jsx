@@ -2,9 +2,82 @@ import birdCrackers from './bird-crackers.png';
 import lakshmi from './Laxmi4 Crackers.png'
 import goldlakshmi from './goldlakshmi.png'
 import twosound from './twosound.jpg'
-
-
+import potjumbo from './potjumbo.jpg'
+import potbig from './potbig.jpg'
+import potspl from './potspl.jpg'
+import potaso from './potaso.jpg'
+import koti from './koti.jpg'
+import kotig from './kotig.jpg'
+import kotij from './kotij.jpg'
+import chakarbig from './chakarbig.jpg'
+import chakarspl from './chakrspl.jpg'
+import chakard from './chakard.jpg'
+import wheel4 from './wheel4.jpg'
+import wire from './wire.jpg'
+import racing from './racing.jpg'
+import disco from './disco.png'
+import ruby from './ruby.jpg'
+import twin1 from './twin1.jpg'
+import twin2 from './twin2.jpg'
+import hydro from './hydro.jpg'
+import bullet from './bullet.png'
+import classic from './classic.png'
+import peacock from './peacock3.png'
+import badap from './badap.jpg'
+import popcornpencil from './popcornpencil.jpg'
+import traffic from './traffic.jpg'
+import sivakasi from './sivakasi.jpg'
+import starfall from './starfall.jpg'
+import pophot from './pophot.jpg'
+import waterfall from './waterfall.jpg'
+import shingchan from './shingchan.jpg'
+import tri from './tri.jpg'
+import peacockf from './peacockf.jpg'
+import Unicorn from './Unicorn.jpg'
+import water from './water.jpg'
+import dragon from './dragon.jpg'
+import touch from './touch.jpg'
+import h20 from './h20.jpg'
+import rocketbomb from './rocketbomb.jpg'
+import tworocket from './tworocket.jpeg'
+import rocket2 from './rocket2.jpg'
+import rocket from './rocket.png'
+import bijilired from './redbijili.png'
+import stripped from './stripped.png'
+import magicpop from './magicpop.jpg'
+import jee from './jee.jpg'
+import pogo from './pogo.jpg'
+import angry from './angry.jpg'
+import butterfly from './butterfly.jpg'
+import watt from './watt.jpg'
+import bambara from './bambara.jpg'
+import drone from './drone.jpg'
+import digitalbomb from './digitalbomb.jpg'
+import photo from './photo.jpg'
+import helicopter from './helicopter.jpg'
+import ranger from './ranger.jpg'
+import goldstar from './goldstar.jpg'
+import silverstar from './silverstar.jpg'
+import redgreen from './redgreen.jpg'
+import redstar from './redstar.jpg'
+import greenstar from './greenstar.jpg'
+import missbutter from './missbutter.jpg'
+import blueice from './blueice.jpg'
+import goldfeast from './goldfeast.jpg'
+import greengarden from './greengarden.jpg'
+import crackling from './crackling.jpg'
+import selfie from './selfie.jpg'
+import serpentsony from './serpentsony.jpg'
 
 export const assets = {
-  birdCrackers,lakshmi,goldlakshmi,twosound,
+  birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,
+  potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
+  wire,racing,disco,ruby,twin1,twin2,hydro,bullet,classic,peacock,
+  badap,popcornpencil,traffic,sivakasi,starfall,pophot,waterfall,
+  shingchan,tri,peacockf,Unicorn,water,dragon,touch,h20,rocketbomb,
+  tworocket,rocket2,rocket,bijilired,stripped,magicpop,jee,pogo,
+  angry,butterfly,watt,bambara,drone,digitalbomb,photo,helicopter,
+  ranger,goldstar,silverstar,redgreen,redstar,greenstar,missbutter,
+  blueice,goldfeast,greengarden,crackling,selfie,serpentsony
+
 };
