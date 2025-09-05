@@ -26,20 +26,17 @@ export const generateReceipt = (orderData) => {
     doc.setLineWidth(1);
     doc.line(30, 55, 180, 55);
     
-   
-    
     if (pageNumber === 1) {
+      // Order Header
+      doc.setFontSize(16);
+      doc.setTextColor(80, 80, 80);
+      doc.text('ORDER RECEIPT', 105, 65, null, null, 'center');
 
-       // Order Header
-    doc.setFontSize(16);
-    doc.setTextColor(80, 80, 80);
-    doc.text('ORDER RECEIPT', 105, 65, null, null, 'center');
-
-    // Order Info
-    doc.setFontSize(10);
-    doc.setTextColor(16, 185, 129);
-    doc.text(`Order Date: ${new Date().toLocaleDateString()}`, 180, 75, null, null, 'right');
-    doc.text(`Order ID: ${orderData._id}`, 180, 81, null, null, 'right');
+      // Order Info
+      doc.setFontSize(10);
+      doc.setTextColor(16, 185, 129);
+      doc.text(`Order Date: ${new Date().toLocaleDateString()}`, 180, 75, null, null, 'right');
+      doc.text(`Order ID: ${orderData._id}`, 180, 81, null, null, 'right');
       doc.setFontSize(12);
       doc.setTextColor(6, 182, 212);
       doc.text('Customer Information:', 20, 85);
@@ -83,10 +80,31 @@ export const generateReceipt = (orderData) => {
       doc.setFontSize(9); // Smaller font for content to fit all columns
       const serialNumber = (pageNumber - 1) * itemsPerPage + index + 1;
 
-      // Calculate discounted price (assuming discount percentage is available in orderData)
-      const discountPercentage = orderData.totals.discountPercentage || 0;
-      const originalPrice = item.originalPrice || item.price / (1 - discountPercentage / 100);
-      const discountedPrice = item.price;
+      // Check if this is a Gift Box item - improved detection
+      const isGiftBox = item.category === 'Gift Box' || 
+                       (item.name && (item.name.includes('Items') || item.name.includes('Gift Box'))) ||
+                       (item.brand && item.brand.includes('Gift Box'));
+      
+      // Calculate prices based on whether it's a Gift Box or not
+      let originalPrice, discountedPrice;
+      
+      if (isGiftBox) {
+        // Gift Box items: no discount applied, so price is the same
+        originalPrice = item.price;
+        discountedPrice = item.price;
+      } else {
+        // Regular items: calculate original price from discounted price
+        const discountPercentage = orderData.totals.discountPercentage || 75;
+        // If we have the original price stored, use it; otherwise calculate it
+        if (item.originalPrice) {
+          originalPrice = item.originalPrice;
+          discountedPrice = item.price;
+        } else {
+          // Reverse calculate the original price from discounted price
+          discountedPrice = item.price;
+          originalPrice = discountedPrice / (1 - discountPercentage / 100);
+        }
+      }
 
       doc.text(serialNumber.toString(), 25, yPos);
       
@@ -95,14 +113,27 @@ export const generateReceipt = (orderData) => {
       const linesNeeded = itemNameLines.length;
       doc.text(itemNameLines, 40, yPos);
       
-      // Original price (with strikethrough effect)
-      doc.setTextColor(128, 128, 128); // Gray color for original price
-      doc.text(`${Math.round(originalPrice)}`, 110, yPos);
-     
+      // Original price
+      if (isGiftBox) {
+        // For Gift Box, show original price in normal color (no strikethrough effect needed)
+        doc.setTextColor(0, 0, 0);
+        doc.text(`${Math.round(originalPrice)}`, 110, yPos);
+      } else {
+        // For regular items, show original price in gray (strikethrough effect)
+        doc.setTextColor(128, 128, 128);
+        doc.text(`${Math.round(originalPrice)}`, 110, yPos);
+      }
       
-      // Discounted price (green color)
-      doc.setTextColor(16, 185, 129);
-      doc.text(`${Math.round(discountedPrice)}`, 135, yPos);
+      // Discounted price
+      if (isGiftBox) {
+        // For Gift Box, show same price in normal color
+        doc.setTextColor(0, 0, 0);
+        doc.text(`${Math.round(discountedPrice)}`, 135, yPos);
+      } else {
+        // For regular items, show discounted price in green
+        doc.setTextColor(16, 185, 129);
+        doc.text(`${Math.round(discountedPrice)}`, 135, yPos);
+      }
       
       // Quantity and total (black color)
       doc.setTextColor(0, 0, 0);
@@ -126,25 +157,20 @@ export const generateReceipt = (orderData) => {
     // Original Subtotal (with strikethrough)
     doc.setTextColor(128, 128, 128);
     doc.text('Original Subtotal', 140, yPos + 18);
-    const originalSubtotalText = `:${Math.round(orderData.totals.originalSubtotal || orderData.totals.subtotal)}`;
+    const originalSubtotalText = `: ${Math.round(orderData.totals.originalSubtotal || orderData.totals.subtotal)}`;
     doc.text(originalSubtotalText, 180, yPos + 18);
-   
 
     if (orderData.totals.discountAmount > 0) {
       doc.setTextColor(16, 185, 129);
       doc.text(`Discount (${orderData.totals.discountPercentage}%):`, 140, yPos + 24);
-      doc.text(`:${Math.round(orderData.totals.discountAmount)}`, 180, yPos + 24);
+      doc.text(`- ${Math.round(orderData.totals.discountAmount)}`, 180, yPos + 24);
       yPos += 6;
     }
-
-    
 
     doc.setFont(undefined, 'bold');
     doc.setTextColor(16, 185, 129);
     doc.text('Final Total:', 140, yPos + 34);
-    doc.text(`:${Math.round(orderData.totals.total)}`, 180, yPos + 34);
-
-  
+    doc.text(`: ${Math.round(orderData.totals.total)}`, 180, yPos + 34);
 
     // Footer
     doc.setFontSize(12);
@@ -152,9 +178,6 @@ export const generateReceipt = (orderData) => {
     doc.text(' Thank you for your purchase!', 105, yPos + 54, null, null, 'center');
     doc.setTextColor(0, 0, 0);
     doc.text('For any queries, contact us at mks_prithi@yahoo.co.in', 105, yPos + 60, null, null, 'center');
-
-    // Decorative circles
-   
   };
 
   // Generate all pages
@@ -169,7 +192,7 @@ export const generateReceipt = (orderData) => {
     const endIndex = Math.min(startIndex + itemsPerPage, orderData.items.length);
     const pageItems = orderData.items.slice(startIndex, endIndex);
 
-    const startY = page === 1 ? 135 : 30;
+    const startY = page === 1 ? 135 : 70;
     let yPos = addItemsTable(pageItems, startY, page);
 
     if (page === totalPages) {

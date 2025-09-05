@@ -4,9 +4,13 @@ import { Star, Plus, Minus } from 'lucide-react';
 const ProductCard = ({ product, cart, addToCart, removeFromCart, discountPercentage = 0.75 }) => {
   const cartItem = cart.find(item => item.id === product.id);
   
+  // Check if product is a Gift Box - no discount for Gift Box items
+  const isGiftBox = product.category === 'Gift Box';
+  const effectiveDiscountPercentage = isGiftBox ? 0 : discountPercentage;
+  
   // Calculate discounted price
   const originalPrice = product.price;
-  const discountedPrice = originalPrice - (originalPrice * discountPercentage);
+  const discountedPrice = originalPrice - (originalPrice * effectiveDiscountPercentage);
 
   return (
     <div className="bg-white/10 backdrop-blur-lg rounded-lg sm:rounded-xl overflow-hidden shadow-md sm:shadow-lg md:shadow-xl border border-white/20 hover:border-yellow-400/50 transition-all duration-300 transform hover:scale-102 group">
@@ -21,24 +25,41 @@ const ProductCard = ({ product, cart, addToCart, removeFromCart, discountPercent
           <Star className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-yellow-400 fill-current" />
           <span className="text-white text-xs">{product.rating}</span>
         </div>
-        {/* Discount Badge */}
-        <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-red-500 text-white text-xs px-1.5 sm:px-2 py-0.5 rounded">
-          {Math.round(discountPercentage * 100)}% OFF
-        </div>
+        {/* Discount Badge - only show for non-Gift Box items */}
+        {!isGiftBox && (
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-red-500 text-white text-xs px-1.5 sm:px-2 py-0.5 rounded">
+            {Math.round(discountPercentage * 100)}% OFF
+          </div>
+        )}
+        {/* Special badge for Gift Box */}
+        {isGiftBox && (
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-purple-500 text-white text-xs px-1.5 sm:px-2 py-0.5 rounded">
+            SPECIAL
+          </div>
+        )}
         <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 h-1 sm:h-1.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
       <div className="p-2 sm:p-3 md:p-4">
         <h3 className="text-xs sm:text-sm md:text-base font-bold text-white mb-1 line-clamp-1">{product.name}</h3>
         <div className="flex items-center justify-between mt-1">
           <div className="flex flex-col">
-            {/* Discounted Price */}
-            <span className="text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
-              ₹{Math.round(discountedPrice)}
-            </span>
-            {/* Original Price with strikethrough */}
-            <span className="text-xs text-gray-300 line-through">
-              ₹{Math.round(originalPrice)}
-            </span>
+            {/* Show price based on whether it's a Gift Box or not */}
+            {isGiftBox ? (
+              // Gift Box - show original price only
+              <span className="text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                ₹{Math.round(originalPrice)}
+              </span>
+            ) : (
+              // Regular items - show discounted and original price
+              <>
+                <span className="text-sm sm:text-base md:text-lg font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                  ₹{Math.round(discountedPrice)}
+                </span>
+                <span className="text-xs text-gray-300 line-through">
+                  ₹{Math.round(originalPrice)}
+                </span>
+              </>
+            )}
           </div>
 
           {cartItem ? (

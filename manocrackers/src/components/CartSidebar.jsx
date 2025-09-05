@@ -14,10 +14,21 @@ const CartSidebar = ({ discountPercentage = 0.75 }) => {
     getTotalPrice 
   } = useCart();
 
-  // Calculate totals with discount
+  // Calculate totals with discount (excluding Gift Box items)
   const calculateTotals = () => {
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const discountAmount = subtotal * discountPercentage;
+    let subtotal = 0;
+    let discountAmount = 0;
+    
+    cart.forEach(item => {
+      const itemTotal = item.price * item.quantity;
+      subtotal += itemTotal;
+      
+      // Only apply discount if it's not a Gift Box item
+      if (item.category !== 'Gift Box') {
+        discountAmount += itemTotal * discountPercentage;
+      }
+    });
+    
     const total = subtotal - discountAmount;
     
     return { subtotal, discountAmount, total };
@@ -26,7 +37,11 @@ const CartSidebar = ({ discountPercentage = 0.75 }) => {
   const totals = calculateTotals();
 
   // Calculate discounted price for individual items
-  const getDiscountedPrice = (originalPrice) => {
+  const getDiscountedPrice = (originalPrice, category) => {
+    // No discount for Gift Box items
+    if (category === 'Gift Box') {
+      return originalPrice;
+    }
     return originalPrice - (originalPrice * discountPercentage);
   };
 
@@ -58,7 +73,7 @@ const CartSidebar = ({ discountPercentage = 0.75 }) => {
           {/* Discount Banner */}
           <div className="bg-emerald-500/20 border border-emerald-400/30 rounded-lg p-2 mb-4">
             <p className="text-emerald-300 text-xs xs:text-sm font-medium text-center">
-              🎉 {Math.round(discountPercentage * 100)}% OFF on all items!
+              🎉 {Math.round(discountPercentage * 100)}% OFF on all items! (Excludes Gift Box)
             </p>
           </div>
 
@@ -79,7 +94,8 @@ const CartSidebar = ({ discountPercentage = 0.75 }) => {
             ) : (
               <div className="space-y-3 xs:space-y-4">
                 {cart.map(item => {
-                  const discountedPrice = getDiscountedPrice(item.price);
+                  const isGiftBox = item.category === 'Gift Box';
+                  const discountedPrice = getDiscountedPrice(item.price, item.category);
                   const originalPrice = item.price;
                   
                   return (
@@ -88,19 +104,33 @@ const CartSidebar = ({ discountPercentage = 0.75 }) => {
                       <div className="flex-1">
                         <h4 className="text-white font-medium text-xs xs:text-sm sm:text-base">{item.name}</h4>
                         <div className="flex items-center space-x-2">
-                          {/* Discounted Price */}
-                          <p className="text-emerald-400 text-xs xs:text-sm sm:text-base font-bold">
-                            ₹{(discountedPrice)}
-                          </p>
-                          {/* Original Price with strikethrough */}
-                          <p className="text-gray-500 text-[10px] xs:text-xs line-through">
-                            ₹{(originalPrice)}
-                          </p>
+                          {isGiftBox ? (
+                            // Gift Box - show original price only
+                            <p className="text-emerald-400 text-xs xs:text-sm sm:text-base font-bold">
+                              ₹{Math.round(originalPrice)}
+                            </p>
+                          ) : (
+                            // Regular items - show discounted and original price
+                            <>
+                              <p className="text-emerald-400 text-xs xs:text-sm sm:text-base font-bold">
+                                ₹{Math.round(discountedPrice)}
+                              </p>
+                              <p className="text-gray-500 text-[10px] xs:text-xs line-through">
+                                ₹{Math.round(originalPrice)}
+                              </p>
+                            </>
+                          )}
                         </div>
                         {/* Individual item total */}
                         <p className="text-emerald-300 text-[10px] xs:text-xs">
                           Total: ₹{Math.round(discountedPrice * item.quantity)}
                         </p>
+                        {/* Gift Box indicator */}
+                        {isGiftBox && (
+                          <p className="text-purple-400 text-[9px] xs:text-[10px] font-medium">
+                            Special Item - No Discount
+                          </p>
+                        )}
                       </div>
                       <div className="flex items-center space-x-1.5 xs:space-x-2">
                         <button

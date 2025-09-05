@@ -68,16 +68,143 @@ import greengarden from './greengarden.jpg'
 import crackling from './crackling.jpg'
 import selfie from './selfie.jpg'
 import serpentsony from './serpentsony.jpg'
+import smoke from './smoke.jpg'
+import minions from './minions.jpg'
+import panda from './panda.png'
+import Incrediables from './Incrediables.jpg'
+import prodance from './prodance.png'
+import spartans from './spartans.png'
+import insta from './insta.png'
+import fancy3p from './fancy3p.jpg'
+import fast from './fast.jpg'
+import shot12 from './shot12.jpg'
+import shot12s from './shot12s.jpg'
+import shot25 from './shot25.jpg'
+import shot50 from './shot50.jpg'
+import shot100 from './shot100.jpg'
+import shot15 from './shot15.jpg'
+import shot25m from './shot25m.jpg'
+import shot30 from './shot30.jpg'
+import shot50t from './shot50t.jpg'
+import shot60 from './shot60.jpg'
+import shot120 from './shot120.jpg'
+import shot240 from './shot240.jpg'
+import troysony from './troysony.png'
+import sonylion from './sonylion.jpg'
+import avatarsony from './avatarsony.jpg'
+import gladysony from './gladysony.jpg'
+import littlesony from './littlesony.jpg'
+import antsony from './antsony.jpg'
+import paperbomb from './paperbomb1.jpg'
+import magicshow from './magicshow.jpg'
+import magicmono from './magicmano.jpg'
+import money3p from './money3p.jpg'
+import siren2p from './siren2p.jpg'
+import siren5p from './siren5p.jpg'
+import siren3p from './siren3p.jpg'
+import sweet from './sweet.jpg'
+import electric7cm from './electric7cm.jpg'
+import crackling7cm from './crackling7cm.jpg'
+import green7cm from './green7cm.jpg'
+import red7cm from './red7cm.jpg'
+import electric10cm from './electric10cm.jpg'
+import crackling10cm from './crackling10cm.jpg'
+import green10cm from './green10cm.jpg'
+import red10cm from './red10cm.jpg'
+import electric12cm from './electric12cm.jpg'
+import crackling12cm from './crackling12cm.jpg'
+import green12cm from './green12cm.jpg'
+import red12cm from './red12cm.jpg'
+import electric15cm from './electric15cm.jpg'
+import crackling15cm from './crackling15cm.jpg'
+import green15cm from './green15cm.jpg'
+import red15cm from './red15cm.jpg'
+import electric30cm from './electric30cm.jpg'
+import crackling30cm from './crackling30cm.jpg'
+import green30cm from './green30cm.jpg'
+import red30cm from './red30cm.jpg'
+import Royal30Electric from './30cm-Royal-Electric.jpg'
+import water30cm from './water30cm.jpg'
+import electric50cm from './electric50cm.jpg'
+import crackling50cm from './crackling50cm.jpg'
+import color50cm from './color50cm.jpg'
+import electric75cm from './electric75cm.jpg'
+import rotating from './rotating.jpg'
+import green75cm from './green75cm.png'
+import danis from './danis.jpg'
+import efil from './elif.jpg'
+import helsimki from './helsimki.jpg'
+import spain from './spain.jpg'
+import denmark from './denmark.jpg'
+import finland from './finland.jpg'
+import poland from './poland.jpg'
+import paris from './paris.jpg'
+import orange from './orange.jpg'
+import goldcard from './goldcard.jpg'
+import kalid from './kalid.png'
+import blueberry from './blueberry.jpg'
+import goldenchip from './goldenchip.jpg'
+import lal from './lal.jpg'
+import narnia from './narnia.jpg'
+import nightangel from './nightangel.jpg'
+import infra from './infra.jpg'
+import yellow from './yellow.jpg'
+import vally from './vally.jpg'
+import mirchi from './mirchi.jpg'
+import angel from './angel.jpg'
+import bluechip from './bluechip.jpg'
+import octo from './octo.jpg'
+import neela from './neela.jpg'
+import vertigo from './vertigo.jpg'
+import monster from './monster.jpg'
+import rain from './rain.jpg'
+import mela from './mela.jpg'
+import rock from './rock.jpg'
+import naya from './naya.jpg'
+import hot from './hot.jpg'
+import genesy from './genesy.jpg'
+import badboy from './badboy.jpg'
+import bugs from './bugs.jpg'
+import heaven from './heaven.jpg'
+import crystle from './crystle.jpg'
+import worldwar from './worldwar.jpg'
+import skytraffic from './skytraffic.jpg'
+import bolly from './bolly.jpg'
+import velvet from './velvet.jpg'
+import lemon from './lemon.jpg'
+import blueocto from './blueocto.jpg'
+import web from './web.jpg'
+import sense from './sense.jpg'
+import xman from './xman.jpg'
+import brucelee from './brucelee.jpg'
+import hercules from './hercules.jpg'
+import colourplus from './colourplus.jpg'
+import menin from './menin.jpg'
+import pirate from './pirate.jpg'
+import terminator from './terminator.jpg'
+import ring from './ring.jpg'
+import royalmax from './royalmax.jpg'
+import royalmega from './royalmega.jpg'
+
 
 export const assets = {
-  birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,
-  potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
-  wire,racing,disco,ruby,twin1,twin2,hydro,bullet,classic,peacock,
-  badap,popcornpencil,traffic,sivakasi,starfall,pophot,waterfall,
-  shingchan,tri,peacockf,Unicorn,water,dragon,touch,h20,rocketbomb,
-  tworocket,rocket2,rocket,bijilired,stripped,magicpop,jee,pogo,
-  angry,butterfly,watt,bambara,drone,digitalbomb,photo,helicopter,
-  ranger,goldstar,silverstar,redgreen,redstar,greenstar,missbutter,
-  blueice,goldfeast,greengarden,crackling,selfie,serpentsony
+  birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
+  wire,racing,disco,ruby,twin1,twin2,hydro,bullet,classic,peacock,badap,popcornpencil,traffic,sivakasi,starfall,pophot,waterfall,
+  shingchan,tri,peacockf,Unicorn,water,dragon,touch,h20,rocketbomb,tworocket,rocket2,rocket,bijilired,stripped,magicpop,jee,pogo,
+  angry,butterfly,watt,bambara,drone,digitalbomb,photo,helicopter,ranger,goldstar,silverstar,redgreen,redstar,greenstar,missbutter,
+  blueice,goldfeast,greengarden,crackling,selfie,serpentsony,smoke,minions,panda,Incrediables,prodance,spartans,insta,fancy3p,fast,
+  shot12,shot12s,shot25,shot50,shot100,shot15,shot25m,shot30,shot50t,shot60,shot120,shot240,troysony,sonylion,avatarsony,gladysony,
+  littlesony,antsony,paperbomb,magicshow,magicmono,money3p,siren2p,siren5p,siren3p,sweet,electric7cm,crackling7cm,green7cm,red7cm,
+  electric10cm,crackling10cm,green10cm,red10cm,electric12cm,crackling12cm,
+  green12cm,red12cm,electric15cm,crackling15cm,green15cm,red15cm,electric30cm,crackling30cm,green30cm,red30cm,Royal30Electric,water30cm,
+  electric50cm,crackling50cm,color50cm,electric75cm,rotating,green75cm,
+  danis,efil,helsimki,spain,denmark,finland,poland,paris,orange,goldcard,
+  kalid,blueberry,goldenchip,lal,narnia,nightangel,infra,yellow,vally,mirchi,
+  angel,bluechip,octo,neela,vertigo,monster,rain,mela,rock,naya,hot,genesy,badboy,
+  bugs,heaven,crystle,worldwar,skytraffic,bolly,velvet,lemon,blueocto,web,sense,
+  xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega
+
+
+
 
 };

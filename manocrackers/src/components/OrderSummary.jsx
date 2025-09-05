@@ -5,7 +5,11 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
   const [showAllItems, setShowAllItems] = useState(false);
   
   // Calculate discounted price for individual items
-  const getDiscountedPrice = (originalPrice) => {
+  const getDiscountedPrice = (originalPrice, category) => {
+    // No discount for Gift Box items
+    if (category === 'Gift Box') {
+      return originalPrice;
+    }
     return originalPrice - (originalPrice * (discountPercentage / 100));
   };
   
@@ -19,7 +23,7 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
       <div className="mb-6 p-4 bg-emerald-50 rounded-lg border border-emerald-100">
         <p className="text-emerald-700 font-medium flex items-center gap-2">
           <CheckCircle className="w-4 h-4" />
-          Special Offer: {Math.round(discountPercentage * 100)}% discount applied to all orders!
+          Special Offer: {Math.round(discountPercentage)}% discount applied to eligible orders! (Excludes Gift Box)
         </p>
       </div>
 
@@ -35,16 +39,30 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
           </thead>
           <tbody className="divide-y divide-gray-100">
             {cartItems.slice(0, showAllItems ? cartItems.length : 3).map((item) => {
-              const discountedPrice = getDiscountedPrice(item.price);
+              const isGiftBox = item.category === 'Gift Box';
+              const discountedPrice = getDiscountedPrice(item.price, item.category);
               
               return (
                 <tr key={`item-${item.id}`} className="hover:bg-gray-50">
                   <td className="py-3">
                     <div className="font-medium text-gray-800">{item.name}</div>
                     <div className="text-xs text-gray-500">
-                      <span className="line-through">₹{Math.round(item.price)}</span>
-                      <span className="ml-2 text-emerald-600 font-medium">₹{Math.round(discountedPrice)}</span>
+                      {isGiftBox ? (
+                        // Gift Box - show original price only
+                        <span className="text-emerald-600 font-medium">₹{Math.round(item.price)} (No discount)</span>
+                      ) : (
+                        // Regular items - show original and discounted price
+                        <>
+                          <span className="line-through">₹{Math.round(item.price)}</span>
+                          <span className="ml-2 text-emerald-600 font-medium">₹{Math.round(discountedPrice)}</span>
+                        </>
+                      )}
                     </div>
+                    {isGiftBox && (
+                      <div className="text-xs text-purple-600 font-medium mt-1">
+                        Special Item
+                      </div>
+                    )}
                   </td>
                   <td className="text-right text-sm text-emerald-600 font-semibold">₹{Math.round(discountedPrice)}</td>
                   <td className="text-right text-sm text-gray-600">{item.quantity}</td>
@@ -68,8 +86,6 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
           </div>
         )}
       </div>
-
-    
 
       {/* Totals section */}
       <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
@@ -101,7 +117,7 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
           🎉 Total Savings: ₹{Math.round(totals.discountAmount)}
         </p>
         <p className="text-xs opacity-90 mt-1">
-          You saved {Math.round(discountPercentage)}% on your entire order!
+          You saved {Math.round(discountPercentage)}% on eligible items!
         </p>
       </div>
 
@@ -128,7 +144,11 @@ export const OrderSummary = ({ cartItems, totals, discountPercentage }) => {
           </li>
           <li className="flex items-start">
             <span className="mr-2">•</span>
-            <span>Discount prices are already applied</span>
+            <span>Gift Box items are sold at original prices</span>
+          </li>
+          <li className="flex items-start">
+            <span className="mr-2">•</span>
+            <span>Discount applied only to eligible items</span>
           </li>
         </ul>
       </div>
