@@ -126,7 +126,7 @@ const HeroSection = ({ scrollToProducts }) => {
                     className="flex items-center justify-center space-x-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 px-4 py-2 rounded-full text-sm transition-all duration-300"
                   >
                     <Phone className="w-4 h-4" />
-                    <span>+91 6382737971</span>
+                    <span>+91 9962814577</span>
                   </a>
                   <a 
                     href="mailto:mks_prithi@yahoo.co.in"

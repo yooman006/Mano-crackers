@@ -19,7 +19,7 @@ export const generateReceipt = (orderData) => {
     doc.setFontSize(12);
     doc.setTextColor(20, 184, 166);
     doc.text('Sivakasi - 626123', 105, 40, null, null, 'center');
-    doc.text('Phone: +91 6382737971 | Email: mks_prithi@yahoo.co.in', 105, 46, null, null, 'center');
+    doc.text('Phone: +91 9962814577 | Email: mks_prithi@yahoo.co.in', 105, 46, null, null, 'center');
     
     // Divider
     doc.setDrawColor(16, 185, 129);

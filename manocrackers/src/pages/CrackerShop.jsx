@@ -132,7 +132,7 @@ const CrackerShop = () => {
 
       {/* Floating WhatsApp Button */}
       <FloatingWhatsApp 
-        phoneNumber="+916382737971 " 
+        phoneNumber="+919962814577" 
         message="Hi! I'm interested in your crackers collection. Can you help me?" 
       />
     </div>
