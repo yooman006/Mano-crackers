@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShoppingCart, Sparkles, Menu, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { assets } from '../assets/assets';
 
 const Header = ({
   isMobileMenuOpen,
@@ -25,15 +26,27 @@ const Header = ({
     <header className="bg-purple-900/30 backdrop-blur-lg border-b border-purple-400/20 fixed top-0 left-0 right-0 z-50">
       <div className="w-full max-w-none px-3 xs:px-4 sm:px-5 md:px-6 lg:px-8 xl:px-12 py-2 xs:py-3 sm:py-4">
         <div className="flex items-center justify-between">
-          {/* Logo Section */}
-          <div className="flex items-center space-x-2 xs:space-x-3 flex-shrink-0">
+          {/* Logo Section with Group Hover */}
+          <div className="flex items-center space-x-2 xs:space-x-3 flex-shrink-0 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            {/* Logo Image */}
+            <div className="relative flex-shrink-0">
+              <img 
+                src={assets.logo} 
+                alt="4 Square Crackers Logo" 
+                className="h-8 w-8 xs:h-10 xs:w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 object-contain"
+              />
+            </div>
+            
+            {/* Sparkles Animation */}
             <div className="relative">
-              <Sparkles className="h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-yellow-400 animate-spin" />
-              <div className="absolute inset-0 h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-yellow-400 animate-ping opacity-25">
+              <Sparkles className="h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-yellow-400 animate-spin" />
+              <div className="absolute inset-0 h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-yellow-400 animate-ping opacity-25">
                 <Sparkles className="h-full w-full" />
               </div>
             </div>
-            <div className="text-[20px] xs:text-xs sm:text-sm md:text-base lg:text-lg font-bold bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent whitespace-nowrap">
+
+            {/* Brand Text */}
+            <div className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-bold bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent whitespace-nowrap">
               MANO Crackers
             </div>
           </div>
@@ -67,7 +80,7 @@ const Header = ({
               onClick={() => setIsCartOpen(!isCartOpen)}
               className="relative bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white p-2 xs:px-3 xs:py-2 md:px-4 md:py-2 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              <ShoppingCart className="h-5 w-5 xs:h-4 xs:w-4 sm:h-4 sm:w-4" />
+              <ShoppingCart className="h-4 w-4 xs:h-4 xs:w-4 sm:h-5 sm:w-5" />
               {getTotalItems() > 0 && (
                 <span className="absolute -top-1 -right-1 xs:-top-1.5 xs:-right-1.5 sm:-top-2 sm:-right-2 bg-yellow-500 text-black text-[10px] xs:text-xs rounded-full h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 flex items-center justify-center animate-pulse font-bold">
                   {getUniqueProductCount()}

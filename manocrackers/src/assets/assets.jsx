@@ -1,3 +1,4 @@
+import logo from './logo.png';
 import birdCrackers from './bird-crackers.png';
 import lakshmi from './Laxmi4 Crackers.png'
 import goldlakshmi from './goldlakshmi.png'
@@ -189,7 +190,7 @@ import dummy from './dummy.jpeg'
 
 
 export const assets = {
-  birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
+  logo,birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
   wire,racing,disco,ruby,twin1,twin2,hydro,bullet,classic,peacock,badap,popcornpencil,traffic,sivakasi,starfall,pophot,waterfall,
   shingchan,tri,peacockf,Unicorn,water,dragon,touch,h20,rocketbomb,tworocket,rocket2,rocket,bijilired,stripped,magicpop,jee,pogo,
   angry,butterfly,watt,bambara,drone,digitalbomb,photo,helicopter,ranger,goldstar,silverstar,redgreen,redstar,greenstar,missbutter,
