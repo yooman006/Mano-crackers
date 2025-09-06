@@ -29,6 +29,15 @@ export default function CrackerShopCheckout() {
   // Calculate order totals
   const totals = calculateOrderTotals(cartItems, DISCOUNT_PERCENTAGE);
 
+  // Calculate discounted price for items (same logic as CartSidebar)
+  const getDiscountedPrice = (originalPrice, category) => {
+    // No discount for Gift Box items
+    if (category === 'Gift Box') {
+      return originalPrice;
+    }
+    return originalPrice - (originalPrice * DISCOUNT_PERCENTAGE);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,13 +48,18 @@ export default function CrackerShopCheckout() {
     try {
       const orderData = {
         customer: formData,
-        items: cartItems.map(item => ({
-          productId: item.id.toString(),
-          name: item.name,
-          brand: item.brand,
-          price: item.price,
-          quantity: item.quantity
-        })),
+        items: cartItems.map(item => {
+          const discountedPrice = getDiscountedPrice(item.price, item.category);
+          return {
+            productId: item.id.toString(),
+            name: item.name,
+            brand: item.brand,
+            price: discountedPrice, // Calculated discounted price
+            originalPrice: item.price, // Original price from product data
+            quantity: item.quantity,
+            category: item.category
+          };
+        }),
         totals: {
           ...totals,
           discountPercentage: DISCOUNT_PERCENTAGE * 100

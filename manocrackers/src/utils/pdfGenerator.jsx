@@ -80,31 +80,16 @@ export const generateReceipt = (orderData) => {
       doc.setFontSize(9); // Smaller font for content to fit all columns
       const serialNumber = (pageNumber - 1) * itemsPerPage + index + 1;
 
-      // Check if this is a Gift Box item - improved detection
+      // Get prices from item data
+      // originalPrice: original price from product data  
+      // price: calculated discounted price (from checkout)
+      const originalPrice = item.originalPrice;
+      const discountedPrice = item.price;
+      
+      // Check if this is a Gift Box item
       const isGiftBox = item.category === 'Gift Box' || 
                        (item.name && (item.name.includes('Items') || item.name.includes('Gift Box'))) ||
                        (item.brand && item.brand.includes('Gift Box'));
-      
-      // Calculate prices based on whether it's a Gift Box or not
-      let originalPrice, discountedPrice;
-      
-      if (isGiftBox) {
-        // Gift Box items: no discount applied, so price is the same
-        originalPrice = item.price;
-        discountedPrice = item.price;
-      } else {
-        // Regular items: calculate original price from discounted price
-        const discountPercentage = orderData.totals.discountPercentage || 75;
-        // If we have the original price stored, use it; otherwise calculate it
-        if (item.originalPrice) {
-          originalPrice = item.originalPrice;
-          discountedPrice = item.price;
-        } else {
-          // Reverse calculate the original price from discounted price
-          discountedPrice = item.price;
-          originalPrice = discountedPrice / (1 - discountPercentage / 100);
-        }
-      }
 
       doc.text(serialNumber.toString(), 25, yPos);
       
