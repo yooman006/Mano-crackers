@@ -185,6 +185,7 @@ import terminator from './terminator.jpg'
 import ring from './ring.jpg'
 import royalmax from './royalmax.jpg'
 import royalmega from './royalmega.jpg'
+import dummy from './dummy.jpeg'
 
 
 export const assets = {
@@ -202,7 +203,7 @@ export const assets = {
   kalid,blueberry,goldenchip,lal,narnia,nightangel,infra,yellow,vally,mirchi,
   angel,bluechip,octo,neela,vertigo,monster,rain,mela,rock,naya,hot,genesy,badboy,
   bugs,heaven,crystle,worldwar,skytraffic,bolly,velvet,lemon,blueocto,web,sense,
-  xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega
+  xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega,dummy
 
 
 
