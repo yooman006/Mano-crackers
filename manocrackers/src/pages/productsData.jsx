@@ -613,7 +613,7 @@ export const products = [
     "id": 56,
     "name": "Prediator Special",
     "price": 1200,
-    "image": assets.rocket,
+    "image": assets.pred,
     "category": "ROCKET",
     "brand": "MANO",
     "rating": null,
