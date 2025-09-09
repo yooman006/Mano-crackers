@@ -932,7 +932,7 @@ export const products = [
     "id": 85,
     "name": "Tik Tak (3 Piece)",
     "price": 1100,
-    "image": assets.dummy,
+    "image": assets.tiktak,
     "category": "NOVELTIES",
     "brand": "MANO",
     "rating": null,

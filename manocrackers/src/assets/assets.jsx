@@ -188,6 +188,7 @@ import royalmax from './royalmax.jpg'
 import royalmega from './royalmega.jpg'
 import dummy from './dummy.jpeg'
 import pred from './pred.jpg'
+import tiktak from './tiktak.png'
 
 
 export const assets = {
@@ -205,7 +206,7 @@ export const assets = {
   kalid,blueberry,goldenchip,lal,narnia,nightangel,infra,yellow,vally,mirchi,
   angel,bluechip,octo,neela,vertigo,monster,rain,mela,rock,naya,hot,genesy,badboy,
   bugs,heaven,crystle,worldwar,skytraffic,bolly,velvet,lemon,blueocto,web,sense,
-  xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega,dummy,pred
+  xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega,dummy,pred,tiktak
 
 
 
