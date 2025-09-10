@@ -189,7 +189,44 @@ import royalmega from './royalmega.jpg'
 import dummy from './dummy.jpeg'
 import pred from './pred.jpg'
 import tiktak from './tiktak.png'
-
+import chit from './chit.jpg'
+import wol from './wol.jpg'
+import pops from './pops.jpg'
+import snake from './snake.jpg'
+import chota98 from './chota98.jpg'
+import fancy2 from './fancy2.jpg'
+import fancy2i from './fancy2i.png'
+import fancy312 from './fancy312.jpg'
+import fancy3121 from './fancy312(1).jpg'
+import lunar from './lunar.png'
+import goldcoin from './goldcoin.png'
+import booty from './booty.png'
+import king from './king.png'
+import greenbeat from './greenbeat.png'
+import fastfury from './fastfury.png'
+import fist from './fist.png'
+import cricket from './cricket.png'
+import thriller from './thriller.png'
+import fancy4k from './fancy4k.jpg'
+import fancy4s from './fancy4s.jpg'
+import fancypink from './fancypink.png'
+import fancypurple from './fancypurple.jpg'
+import aladin from './aladin.png'
+import lion from './lion.png'
+import rockdog from './rockdog.png'
+import duck from './duck.png'
+import iceblue from './iceblue.png'
+import sporange from './sporange.png'
+import night from './night.png'
+import sizz from './sizz.png'
+import crack from './crack.png'
+import setout from './setout.png'
+import captain from './captain.jpg'
+import hulk from './hulk.jpg'
+import robin from './robin.jpg'
+import gift31 from './gift31.png'
+import gift36 from './gift36.png'
+import gift41 from './gift41.png'
 
 export const assets = {
   logo,birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
@@ -206,8 +243,10 @@ export const assets = {
   kalid,blueberry,goldenchip,lal,narnia,nightangel,infra,yellow,vally,mirchi,
   angel,bluechip,octo,neela,vertigo,monster,rain,mela,rock,naya,hot,genesy,badboy,
   bugs,heaven,crystle,worldwar,skytraffic,bolly,velvet,lemon,blueocto,web,sense,
-  xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega,dummy,pred,tiktak
-
+  xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega,dummy,pred,tiktak,chit,
+  wol,pops,snake,chota98,fancy2,fancy2i,fancy312,fancy3121,lunar,goldcoin,
+  booty,king,greenbeat,fastfury,fist,cricket,thriller,fancy4k,fancy4s,fancypink,fancypurple,aladin,lion,rockdog,duck,iceblue,sporange,
+  night,sizz,crack,setout,captain,hulk,robin,gift31,gift36,gift41
 
 
 
