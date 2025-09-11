@@ -1975,7 +1975,7 @@ export const products = [
 },
 {
   "id": 180,
-  "name": "Magic Show (MANO)",
+  "name": "Magic Show (SONY)",
   "price": 1800,
   "image": assets.magicmono,
   "category": "MARRIAGE PARTY SPECIAL",
