@@ -228,6 +228,7 @@ import gift31 from './gift31.png'
 import gift36 from './gift36.png'
 import gift41 from './gift41.png'
 import rainy from './rainy.png'
+import redsun from './redsun.jpg'
 
 export const assets = {
   logo,birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
@@ -241,7 +242,7 @@ export const assets = {
   green12cm,red12cm,electric15cm,crackling15cm,green15cm,red15cm,electric30cm,crackling30cm,green30cm,red30cm,Royal30Electric,water30cm,
   electric50cm,crackling50cm,color50cm,electric75cm,rotating,green75cm,
   danis,efil,helsimki,spain,denmark,finland,poland,paris,orange,goldcard,
-  kalid,blueberry,goldenchip,lal,narnia,nightangel,infra,yellow,vally,mirchi,rainy,
+  kalid,blueberry,goldenchip,lal,narnia,nightangel,infra,yellow,vally,mirchi,rainy,redsun,
   angel,bluechip,octo,neela,vertigo,monster,rain,mela,rock,naya,hot,genesy,badboy,
   bugs,heaven,crystle,worldwar,skytraffic,bolly,velvet,lemon,blueocto,web,sense,
   xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega,dummy,pred,tiktak,chit,

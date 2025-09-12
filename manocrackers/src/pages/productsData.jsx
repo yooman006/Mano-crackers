@@ -888,7 +888,7 @@ export const products = [
     "id": 81,
     "name": "Red Sun (5 Piece)",
     "price": 800,
-    "image": assets.dummy,
+    "image": assets.redsun,
     "category": "NOVELTIES",
     "brand": "MANO",
     "rating": null,
