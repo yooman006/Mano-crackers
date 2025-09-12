@@ -921,7 +921,7 @@ export const products = [
     "id": 84,
     "name": "Rainy & Shiny (3 Piece)",
     "price": 1100,
-    "image": assets.dummy,
+    "image": assets.rainy,
     "category": "NOVELTIES",
     "brand": "MANO",
     "rating": null,
