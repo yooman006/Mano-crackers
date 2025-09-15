@@ -231,6 +231,9 @@ import rainy from './rainy.png'
 import redsun from './redsun.jpg'
 import jack from './jack.jpg'
 import belly from './belly.jpg'
+import poppop from './poppop.jpg'
+import hand from './hand.png'
+import hakeer from './hakeer.jpg'
 
 export const assets = {
   logo,birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
@@ -246,7 +249,7 @@ export const assets = {
   danis,efil,helsimki,spain,denmark,finland,poland,paris,orange,goldcard,
   kalid,blueberry,goldenchip,lal,narnia,nightangel,infra,yellow,vally,mirchi,rainy,redsun,
   angel,bluechip,octo,neela,vertigo,monster,rain,mela,rock,naya,hot,genesy,badboy,jack,belly,
-  bugs,heaven,crystle,worldwar,skytraffic,bolly,velvet,lemon,blueocto,web,sense,
+  bugs,heaven,crystle,worldwar,skytraffic,bolly,velvet,lemon,blueocto,web,sense,poppop,hand,hakeer,
   xman,brucelee,hercules,colourplus,menin,pirate,terminator,ring,royalmax,royalmega,dummy,pred,tiktak,chit,
   wol,pops,snake,chota98,fancy2,fancy2i,fancy312,fancy3121,lunar,goldcoin,
   booty,king,greenbeat,fastfury,fist,cricket,thriller,fancy4k,fancy4s,fancypink,fancypurple,aladin,lion,rockdog,duck,iceblue,sporange,
