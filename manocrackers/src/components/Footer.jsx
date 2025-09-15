@@ -98,7 +98,9 @@ const Footer = ({ scrollToProducts, scrollToFooter }) => {
                 <Phone className="h-3 w-3 xs:h-4 xs:w-4 flex-shrink-0 text-orange-400 mt-0.5" />
                 <div className="flex flex-col space-y-1">
                   <span>+91 9962814577</span>
-                  <span>+91 9943860510</span>
+                  <span>+91 9486462184</span>
+                  <span>+91 8870908418</span>
+                  <span>+91 9894128822</span>
                 </div>
               </div>
               <div className="flex items-center space-x-2">

@@ -237,6 +237,9 @@ import hakeer from './hakeer.jpg'
 import handcone from './handcone.jpg'
 import guitar from './guitar.jpg'
 import kadha from './kadha.jpg'
+import love from './love.jpg'
+import circus from './circus.jpg'
+
 
 export const assets = {
   logo,birdCrackers,lakshmi,goldlakshmi,twosound,potjumbo,potbig,potspl,potaso,koti,kotig,kotij,chakarbig,chakarspl,chakard,wheel4,
@@ -248,7 +251,7 @@ export const assets = {
   littlesony,antsony,paperbomb,magicshow,magicmono,money3p,siren2p,siren5p,siren3p,sweet,electric7cm,crackling7cm,green7cm,red7cm,
   electric10cm,crackling10cm,green10cm,red10cm,electric12cm,crackling12cm,
   green12cm,red12cm,electric15cm,crackling15cm,green15cm,red15cm,electric30cm,crackling30cm,green30cm,red30cm,Royal30Electric,water30cm,
-  electric50cm,crackling50cm,color50cm,electric75cm,rotating,green75cm,guitar,kadha,
+  electric50cm,crackling50cm,color50cm,electric75cm,rotating,green75cm,guitar,kadha,love,circus,
   danis,efil,helsimki,spain,denmark,finland,poland,paris,orange,goldcard,handcone,
   kalid,blueberry,goldenchip,lal,narnia,nightangel,infra,yellow,vally,mirchi,rainy,redsun,
   angel,bluechip,octo,neela,vertigo,monster,rain,mela,rock,naya,hot,genesy,badboy,jack,belly,
