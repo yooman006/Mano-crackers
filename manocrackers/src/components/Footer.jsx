@@ -94,15 +94,22 @@ const Footer = ({ scrollToProducts, scrollToFooter }) => {
               Contact Info
             </h4>
             <div className="space-y-2 xs:space-y-3 text-gray-300 text-xs xs:text-sm sm:text-base">
-              <div className="flex items-start space-x-2">
-                <Phone className="h-3 w-3 xs:h-4 xs:w-4 flex-shrink-0 text-orange-400 mt-0.5" />
-                <div className="flex flex-col space-y-1">
-                  <span>+91 9962814577</span>
-                  <span>+91 9486462184</span>
-                  <span>+91 8870908418</span>
-                  <span>+91 9894128822</span>
+              <div className="space-y-2">
+                  {['+91 9894128822', '+91 8870908418','+91 9486462184','+91 9962814577'].map((phone, index) => (
+                    <a
+                      key={phone}
+                      href={`tel:${phone}`}
+                      className="group flex items-center space-x-3 bg-violet-600 hover:bg-amber-800/40 border border-amber-700/40 hover:border-amber-500/40 rounded-xl p-3 transition-all duration-300"
+                    >
+                      <div className="bg-gradient-to-br from-emerald-600/25 to-green-600/25 p-2 rounded-lg border border-emerald-500/25">
+                        <Phone className="w-4 h-4 text-emerald-400" />
+                      </div>
+                      <div>
+                        <span className="text-amber-200 group-hover:text-amber-100 text-sm font-semibold">{phone}</span>
+                      </div>
+                    </a>
+                  ))}
                 </div>
-              </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-3 w-3 xs:h-4 xs:w-4 flex-shrink-0 text-blue-400" />
                 <span className="break-all">mks_prithi@yahoo.co.in</span>
