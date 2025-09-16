@@ -133,7 +133,7 @@ const HeroSection = ({ scrollToProducts }) => {
                     className="flex items-center justify-center space-x-2 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 px-4 py-2 rounded-full text-sm transition-all duration-300"
                   >
                     <Mail className="w-4 h-4" />
-                    <span>mks_prithi@yahoo.co.in</span>
+                    <span>manocrackers39@gmail.com</span>
                   </a>
                 </div>
               </div>

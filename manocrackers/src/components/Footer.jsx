@@ -112,7 +112,7 @@ const Footer = ({ scrollToProducts, scrollToFooter }) => {
                 </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-3 w-3 xs:h-4 xs:w-4 flex-shrink-0 text-blue-400" />
-                <span className="break-all">mks_prithi@yahoo.co.in</span>
+                <span className="break-all">manocrackers39@gmail.com</span>
               </div>
               <div className="flex items-start space-x-2">
                 <Home className="h-3 w-3 xs:h-4 xs:w-4 flex-shrink-0 text-purple-400 mt-0.5" />
