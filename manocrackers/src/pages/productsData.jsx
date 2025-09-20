@@ -371,7 +371,7 @@ export const products = [
     "id": 34,
     "name": "Hakker Bomb",
     "price": 1400,
-    "image": assets.hakeer,
+    "image": assets.hacker,
     "category": "BOMBS",
     "brand": "MANO",
     "rating": null,

@@ -239,6 +239,7 @@ import guitar from './guitar.jpg'
 import kadha from './kadha.jpg'
 import love from './love.jpg'
 import circus from './circus.jpg'
+import hacker from './hackeer.jpg'
 
 
 export const assets = {
@@ -249,7 +250,7 @@ export const assets = {
   blueice,goldfeast,greengarden,crackling,selfie,serpentsony,smoke,minions,panda,Incrediables,prodance,spartans,insta,fancy3p,fast,
   shot12,shot12s,shot25,shot50,shot100,shot15,shot25m,shot30,shot50t,shot60,shot120,shot240,troysony,sonylion,avatarsony,gladysony,
   littlesony,antsony,paperbomb,magicshow,magicmono,money3p,siren2p,siren5p,siren3p,sweet,electric7cm,crackling7cm,green7cm,red7cm,
-  electric10cm,crackling10cm,green10cm,red10cm,electric12cm,crackling12cm,
+  electric10cm,crackling10cm,green10cm,red10cm,electric12cm,crackling12cm,hacker,
   green12cm,red12cm,electric15cm,crackling15cm,green15cm,red15cm,electric30cm,crackling30cm,green30cm,red30cm,Royal30Electric,water30cm,
   electric50cm,crackling50cm,color50cm,electric75cm,rotating,green75cm,guitar,kadha,love,circus,
   danis,efil,helsimki,spain,denmark,finland,poland,paris,orange,goldcard,handcone,
