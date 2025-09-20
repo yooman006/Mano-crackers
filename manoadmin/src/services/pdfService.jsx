@@ -1,4 +1,3 @@
-// services/pdfService.js
 import { jsPDF } from 'jspdf';
 import { formatDate } from '../utils/dateUtils';
 
@@ -91,7 +90,7 @@ export const pdfService = {
 
       doc.setFont(undefined, 'bold');
       doc.text('Total Amount:', 140, yPos + 30);
-      doc.text(`${order.totals.total.toFixed(2)}`, 180, yPos + 30);
+      doc.text(`${Math.round(order.totals.total.toFixed(2))}`, 180, yPos + 30);
       doc.setFontSize(10);
       doc.setTextColor(100, 100, 100);
       doc.text('Thank you for your business', 105, yPos + 50, null, null, 'center');
