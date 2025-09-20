@@ -186,4 +186,34 @@ export const generateReceipt = (orderData) => {
   }
 
   doc.save(`order_receipt_${orderData._id}.pdf`);
+
+   return doc.output('datauristring').split(',')[1];
+};
+
+export const sendReceiptEmail = async (orderData, pdfBase64) => {
+  try {
+    const response = await fetch('https://mano-crackers-backend.azurewebsites.net/api/orders/send-receipt-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        customerEmail: orderData.customer.email,
+        customerName: `${orderData.customer.firstName} ${orderData.customer.lastName || ''}`,
+        orderId: orderData._id,
+        pdfBase64: pdfBase64,
+        orderData: orderData
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to send email');
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error('Email sending failed:', error);
+    throw error;
+  }
 };

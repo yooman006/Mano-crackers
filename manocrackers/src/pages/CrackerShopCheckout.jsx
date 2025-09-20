@@ -6,7 +6,7 @@ import { CustomerForm } from '../components/CustomerForm';
 import { SuccessModal } from '../components/SuccessModel';
 import { useCheckoutForm } from '../hooks/useCheckoutForm';
 import { submitOrder } from '../services/orderServices';
-import { generateReceipt } from '../utils/pdfGenerator';
+import { generateReceipt, sendReceiptEmail } from '../utils/pdfGenerator'; 
 import { calculateOrderTotals } from '../utils/calculations';
 import { useCart } from '../context/CartContext';
 
@@ -18,6 +18,7 @@ export default function CrackerShopCheckout() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [emailStatus, setEmailStatus] = useState(''); // Track email sending status
   
   const {
     formData,
@@ -44,6 +45,7 @@ export default function CrackerShopCheckout() {
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setEmailStatus('Processing order...');
 
     try {
       const orderData = {
@@ -67,18 +69,33 @@ export default function CrackerShopCheckout() {
       };
 
       const responseData = await submitOrder(orderData);
-
-      setShowSuccess(true);
-
-      // Generate PDF receipt
-      generateReceipt({
+      
+      const completeOrderData = {
         ...orderData,
         _id: responseData.order._id,
         orderDate: responseData.order.orderDate
-      });
+      };
+
+      // Generate PDF (downloads automatically) and get base64 for email
+      setEmailStatus('Generating receipt...');
+      const pdfBase64 = generateReceipt(completeOrderData);
+
+      // Send receipt via email
+      setEmailStatus('Sending receipt to your email...');
+      try {
+        await sendReceiptEmail(completeOrderData, pdfBase64);
+        setEmailStatus('Receipt sent successfully to your email!');
+      } catch (emailError) {
+        console.error('Email sending failed:', emailError);
+        setEmailStatus('Order completed! Receipt downloaded, but email sending failed.');
+        // Don't throw error here - order was successful, just email failed
+      }
+
+      setShowSuccess(true);
 
     } catch (error) {
       console.error('Order submission error:', error);
+      setEmailStatus('');
       alert(`Error: ${error.message}`);
     } finally {
       setIsSubmitting(false);
@@ -87,6 +104,7 @@ export default function CrackerShopCheckout() {
 
   const handleSuccessClose = () => {
     setShowSuccess(false);
+    setEmailStatus('');
     // Clear the cart after successful order
     clearCart();
     navigate('/');
@@ -152,6 +170,13 @@ export default function CrackerShopCheckout() {
             Continue Shopping
           </button>
         </div>
+
+        {/* Email Status Message - ADD THIS */}
+        {emailStatus && (
+          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-blue-800 text-center">{emailStatus}</p>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="grid lg:grid-cols-2 gap-8">
