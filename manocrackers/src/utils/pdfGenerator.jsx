@@ -162,7 +162,7 @@ export const generateReceipt = (orderData) => {
     doc.setTextColor(16, 185, 129);
     doc.text(' Thank you for your purchase!', 105, yPos + 54, null, null, 'center');
     doc.setTextColor(0, 0, 0);
-    doc.text('For any queries, contact us at mks_prithi@yahoo.co.in', 105, yPos + 60, null, null, 'center');
+    doc.text('For any queries, contact us at manocrackers39@gmail.com', 105, yPos + 60, null, null, 'center');
   };
 
   // Generate all pages
